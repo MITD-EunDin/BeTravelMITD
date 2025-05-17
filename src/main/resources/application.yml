@@ -27,4 +27,4 @@ vnpay:
   tmnCode: ${VNPAY_TMN_CODE:V3FZTK5D}
   hashSecret: ${VNPAY_HASH_SECRET:DKB4M4P0VLKUWVRZC3F42S2YESLIW7XJ}
   payUrl: ${VNPAY_PAY_URL:https://sandbox.vnpayment.vn/paymentv2/vpcpay.html}
-  returnUrl: ${VNPAY_RETURN_URL:http://localhost:8080/payment/vnpay-return}
+  returnUrl: ${VNPAY_RETURN_URL:https://be-travel-mitd.onrender.com/payment/vnpay-return}
