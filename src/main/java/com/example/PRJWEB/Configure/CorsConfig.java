@@ -10,7 +10,7 @@ public class CorsConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**") // Áp dụng cho tất cả đường dẫn
                 .allowedOrigins("https://travel-mitd.vercel.app","http://localhost:3000") // Cho phép React gọi
-                .allowedMethods("GET", "POST", "PUT", "DELETE") // Chỉ định phương thức cụ thể
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH") // Chỉ định phương thức cụ thể
                 .allowedHeaders("*") // Cho phép mọi header
                 .allowCredentials(true); // Cho phép gửi cookie/token nếu cần
     }
