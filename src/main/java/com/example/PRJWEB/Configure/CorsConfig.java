@@ -9,7 +9,7 @@ public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**") // Áp dụng cho tất cả đường dẫn
-                .allowedOrigins("http://localhost:3000") // Cho phép React gọi
+                .allowedOrigins("https://travel-mitd.vercel.app","http://localhost:3000") // Cho phép React gọi
                 .allowedMethods("GET", "POST", "PUT", "DELETE") // Chỉ định phương thức cụ thể
                 .allowedHeaders("*") // Cho phép mọi header
                 .allowCredentials(true); // Cho phép gửi cookie/token nếu cần
