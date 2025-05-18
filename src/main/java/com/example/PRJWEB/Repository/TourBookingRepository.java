@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface TourBookingRepository extends JpaRepository<Tour_booking , Long> {
     List<Tour_booking> findByCustomer(User customer);
@@ -23,5 +22,4 @@ public interface TourBookingRepository extends JpaRepository<Tour_booking , Long
     Integer getTotalPeopleByTourScheduleId(@Param("tourScheduleId") Integer tourScheduleId);
 
     List<Tour_booking> findByEmployee(User employee);
-
 }

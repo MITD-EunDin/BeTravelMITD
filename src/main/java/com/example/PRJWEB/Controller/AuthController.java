@@ -1,6 +1,5 @@
 package com.example.PRJWEB.Controller;
 
-import com.example.PRJWEB.DTO.Request.UpdatePasswordRequest;
 import com.example.PRJWEB.DTO.Respon.AuthResponse;
 import com.example.PRJWEB.Entity.User;
 import com.example.PRJWEB.Enums.Roles;
@@ -13,6 +12,7 @@ import com.example.PRJWEB.DTO.Request.GoogleLoginRequest;
 import com.example.PRJWEB.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -67,17 +67,22 @@ public class AuthController {
     }
 
     @PostMapping("/update-password")
+//    @PreAuthorize("#id == authentication.principal.claims['user_id']")
     public ResponseEntity<Map<String, String>> updatePassword(
-            @RequestBody UpdatePasswordRequest request
+            @RequestParam Long id,
+            @RequestParam String newPassword
     ) {
         try {
-            userService.updatePassword(request.getEmail(), request.getNewPassword());
-            return ResponseEntity.ok(Map.of("message", "Mật khẩu đã được cập nhật thành công"));
+            User user = userService.findById(id.intValue());
+            if (user == null) {
+                throw new AppException(ErrorCode.USER_NOT_EXISTED);
+            }
+            user.setPassword(passwordEncoder.encode(newPassword));
+            userService.updateUser(id, user);
+            return ResponseEntity.ok(Map.of("message", "Password updated successfully"));
         } catch (Exception e) {
-            System.err.println("Lỗi cập nhật mật khẩu: " + e.getMessage());
+            System.err.println("Update password error: " + e.getMessage());
             return ResponseEntity.status(400).body(Map.of("error", e.getMessage()));
         }
     }
-
-
 }

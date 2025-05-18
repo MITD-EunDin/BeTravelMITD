@@ -110,7 +110,7 @@ public class TourBookingService {
                 .collect(Collectors.toList());
     }
 
-    public TourBookingResponse mapToTourBookingResponse(Tour_booking booking) {
+    private TourBookingResponse mapToTourBookingResponse(Tour_booking booking) {
         TourBookingResponse response = tourBookingMapper.toTourBookingResponse(booking);
 
         List<Payment> payments = paymentRepository.findByBooking(booking);
@@ -147,11 +147,6 @@ public class TourBookingService {
 
     public Tour_booking getBookingById(Long id) {
         return tourBookingRepository.findById(id)
-                .orElseThrow(() -> new AppException(ErrorCode.BOOKING_NOT_FOUND));
-    }
-
-    public Tour_booking getBookingByOrderId(Long orderId) {
-        return tourBookingRepository.findById(orderId)
                 .orElseThrow(() -> new AppException(ErrorCode.BOOKING_NOT_FOUND));
     }
 
@@ -271,6 +266,4 @@ public class TourBookingService {
         // Hoa hồng 5% doanh thu
         return doanhThu.multiply(BigDecimal.valueOf(0.05));
     }
-
-
 }
